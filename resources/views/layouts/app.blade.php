@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <style>
+        html {
+            scrollbar-gutter: stable;
+        }
+
         .flatpickr-calendar {
             font-family: 'Outfit', sans-serif !important;
             background: rgba(255, 255, 255, 0.95) !important;
@@ -40,7 +44,6 @@
         .flatpickr-day {
             border-radius: 0.75rem !important;
             color: #3f3f46 !important;
-            /* zinc-700 */
             transition: all 0.2s ease !important;
         }
 
@@ -125,7 +128,7 @@
         class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center p-1.5 gap-1 rounded-full bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5)]">
 
         <a href="{{ route('home') }}"
-            class="flex items-center justify-center w-12 h-12 rounded-full text-zinc-900 bg-white shadow-sm transition-transform active:scale-90">
+            class="flex items-center justify-center w-12 h-12 rounded-full transition-all active:scale-90 {{ request()->routeIs('home') ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-400 hover:text-zinc-900' }}">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -133,8 +136,8 @@
             </svg>
         </a>
 
-        <a href=" {{ route('calendar') }}"
-            class="flex items-center justify-center w-12 h-12 rounded-full text-zinc-400 hover:text-zinc-900 transition-colors active:scale-90">
+        <a href="{{ route('calendar') }}"
+            class="flex items-center justify-center w-12 h-12 rounded-full transition-all active:scale-90 {{ request()->routeIs('calendar') ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-400 hover:text-zinc-900' }}">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -143,8 +146,9 @@
                 <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
         </a>
+
         <a href="{{ route('profile') }}"
-            class="flex items-center justify-center w-12 h-12 rounded-full text-zinc-400 hover:text-zinc-900 transition-colors active:scale-90">
+            class="flex items-center justify-center w-12 h-12 rounded-full transition-all active:scale-90 {{ request()->routeIs('profile') ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-400 hover:text-zinc-900' }}">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path
@@ -309,7 +313,6 @@
                 }, 300);
             };
 
-            // Вешаем обработчик на каждую найденную кнопку
             openBtns.forEach(btn => {
                 btn.addEventListener('click', openModal);
             });
@@ -325,19 +328,19 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
 
-<script>
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             flatpickr("#starts_at", {
                 enableTime: true,
                 time_24hr: true,
                 locale: "ru",
-                disableMobile: "true", 
+                disableMobile: "true",
 
                 dateFormat: "Y-m-d\\TH:i",
 
                 altInput: true,
-                altFormat: "j F Y, H:i", 
-                
+                altFormat: "j F Y, H:i",
+
                 altInputClass: "w-full pl-12 pr-4 py-3.5 rounded-xl border border-zinc-200 bg-white/50 focus:bg-white focus:outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-400 transition-all font-mono text-base text-zinc-900 shadow-sm cursor-pointer",
                 placeholder: "Выберите дату и время",
                 minDate: new Date(),

@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TelegramController;
+use App\Http\Controllers\ProfileController;
 
-// === МАРШРУТЫ ДЛЯ ГОСТЕЙ (только если НЕ авторизован) ===
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
@@ -13,14 +14,17 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 
-// === ЗАЩИЩЕННЫЕ МАРШРУТЫ (только для авторизованных) ===
 Route::middleware('auth')->group(function () {
-    // Твои существующие страницы
     Route::get('/', [EventController::class, 'index'])->name('home');
     Route::get('/calendar', [EventController::class, 'calendar'])->name('calendar');
     Route::resource('events', EventController::class)->except(['index']);
-    
-    // Профиль и выход
-    Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile/settings', [ProfileController::class, 'updateSettings'])->name('profile.settings.update');
+
+    Route::post('/telegram/bind', [TelegramController::class, 'bindAccount'])->name('telegram.bind');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+Route::post('/telegram/webhook', [TelegramController::class, 'webhook'])->name('telegram.webhook');

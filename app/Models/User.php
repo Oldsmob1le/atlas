@@ -17,10 +17,16 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
+protected $fillable = [
         'name',
         'phone',
         'password',
+        'phone',
+        'telegram_chat_id',
+        'telegram_auth_token',
+        'notify_enabled',
+        'notify_time',
+        'notify_repeat',
     ];
 
     /**

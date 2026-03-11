@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Главная')
-@section('header_title', 'Привет, Никита')
+@section('header_title', 'Привет,  ' . auth()->user()->name)
 @section('header_right', \Carbon\Carbon::now()->locale('ru')->translatedFormat('l, d M'))
 
 @section('content')
@@ -23,8 +23,8 @@
                         class="group relative flex items-center justify-between p-4 rounded-2xl bg-white border border-zinc-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.04)] hover:border-zinc-200 transition-all duration-300">
 
                         <div class="flex items-center gap-4">
-                            <div class="w-1.5 h-10 rounded-full bg-zinc-800 category-indicator"
-                                data-category="{{ $event->category }}"></div>
+                            <div class="w-1.5 h-10 rounded-full shadow-sm"
+                                style="background-color: var(--cat-{{ $event->category }});"></div>
 
                             <div class="flex flex-col">
                                 <span class="text-base font-medium text-zinc-900 tracking-tight">{{ $event->title }}</span>
@@ -96,13 +96,13 @@
                         class="group relative flex items-center justify-between p-4 rounded-2xl bg-white border border-zinc-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.04)] hover:border-zinc-200 transition-all duration-300">
 
                         <div class="flex items-center gap-4">
-                            <div class="w-1.5 h-10 rounded-full bg-zinc-300 category-indicator"
-                                data-category="{{ $event->category }}"></div>
+                            <div class="w-1.5 h-10 rounded-full opacity-60"
+                                style="background-color: var(--cat-{{ $event->category }});"></div>
 
                             <div class="flex flex-col">
                                 <span class="text-base font-medium text-zinc-900 tracking-tight">{{ $event->title }}</span>
                                 <span class="text-sm font-mono text-zinc-400">
-                                    {{ \Carbon\Carbon::parse($event->starts_at)->format('d M · H:i') }}
+                                    {{ \Carbon\Carbon::parse($event->starts_at)->locale('ru')->translatedFormat('d F H:i') }}
                                 </span>
                             </div>
                         </div>

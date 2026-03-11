@@ -66,12 +66,12 @@
         <div class="absolute inset-8 rounded-[2.5rem] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] bg-white/5 backdrop-blur-md pointer-events-none"></div>
         
         <div class="relative z-10 pt-8 pl-8 text-white/40 font-mono text-sm">
-            SYS.ATLAS // v2.0.4-beta
+            SYS.ATLAS // v1.0.3-beta
         </div>
         
         <div class="relative z-10 pb-12 pl-8 pr-12 max-w-lg">
             <h2 class="text-4xl md:text-5xl tracking-tighter text-white leading-none mb-6">Добро пожаловать<br>в систему.</h2>
-            <p class="text-zinc-400 text-base leading-relaxed max-w-[65ch]">Архитектура цифровых интерфейсов, выходящая за рамки стандартных ограничений. Присоединяйтесь для получения полного доступа.</p>
+            <p class="text-zinc-400 text-base leading-relaxed max-w-[65ch]">Управляйте своими задачами и расписанием в едином, сфокусированном пространстве.</p>
         </div>
     </div>
 
