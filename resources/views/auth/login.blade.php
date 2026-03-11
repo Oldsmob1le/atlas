@@ -63,7 +63,7 @@
         <div class="absolute inset-8 rounded-[2.5rem] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] bg-white/5 backdrop-blur-md pointer-events-none"></div>
         
         <div class="relative z-10 pt-8 pl-8 text-white/40 font-mono text-sm">
-            SYS.ATLAS // v1.0.4-beta
+            SYS.ATLAS // v1.0.5-beta
         </div>
         
         <div class="relative z-10 pb-12 pl-8 pr-12 max-w-lg">
