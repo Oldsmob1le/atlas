@@ -7,18 +7,30 @@
 @section('content')
     <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
 
+        @php
+            $now = \Carbon\Carbon::now();
+            $todayUpcoming = collect($todayEvents)->filter(function($event) use ($now) {
+                return \Carbon\Carbon::parse($event->starts_at)->gte($now);
+            })->sortBy('starts_at');
+            $todayPast = collect($todayEvents)->filter(function($event) use ($now) {
+                return \Carbon\Carbon::parse($event->starts_at)->lt($now);
+            })->sortByDesc('starts_at');
+
+            $sortedTodayEvents = $todayUpcoming->concat($todayPast);
+        @endphp
+
         <div class="mb-12">
             <h2 class="text-xl font-medium tracking-tight text-zinc-900 mb-6 flex items-center gap-3">
                 Сегодня
-                @if ($todayEvents->count() > 0)
+                @if ($sortedTodayEvents->count() > 0)
                     <span class="px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-500 text-xs font-mono">
-                        {{ $todayEvents->count() }}
+                        {{ $sortedTodayEvents->count() }}
                     </span>
                 @endif
             </h2>
 
             <div class="flex flex-col gap-3">
-                @forelse($todayEvents as $event)
+                @forelse($sortedTodayEvents as $event)
                     <div
                         class="group relative flex items-center justify-between p-4 rounded-2xl bg-white border border-zinc-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.04)] hover:border-zinc-200 transition-all duration-300">
 

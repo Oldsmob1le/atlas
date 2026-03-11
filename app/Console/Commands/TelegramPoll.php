@@ -8,7 +8,6 @@ use App\Models\User;
 
 class TelegramPoll extends Command
 {
-    // Название команды для запуска в терминале
     protected $signature = 'telegram:poll';
     protected $description = 'Слушать сообщения из Telegram (Long Polling)';
 

@@ -23,6 +23,10 @@
 
         @php
             $isLinked = !empty(auth()->user()->telegram_chat_id);
+            $notifyEnabled = $isLinked && auth()->user()->notify_enabled;
+
+            $showExtended = $notifyEnabled ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0';
+            $showRepeat = ($notifyEnabled && auth()->user()->notify_time !== '0m') ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0';
         @endphp
 
         <div>
@@ -87,14 +91,14 @@
 
                     <label class="relative inline-flex items-center {{ $isLinked ? 'cursor-pointer active:scale-95' : 'cursor-not-allowed opacity-50' }} transition-transform" title="{{ !$isLinked ? 'Сначала привяжите Telegram' : '' }}">
                         <input type="checkbox" id="notify-toggle" class="sr-only peer" 
-                            {{ ($isLinked && auth()->user()->notify_enabled) ? 'checked' : '' }}
+                            {{ $notifyEnabled ? 'checked' : '' }}
                             {{ !$isLinked ? 'disabled' : '' }}>
                         <div class="w-11 h-6 bg-zinc-200 rounded-full peer peer-focus:outline-none peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-zinc-900 shadow-inner">
                         </div>
                     </label>
                 </div>
 
-                <div id="extended-settings" class="grid grid-rows-[1fr] opacity-100 transition-all duration-300 ease-in-out">
+                <div id="extended-settings" class="grid {{ $showExtended }} transition-all duration-300 ease-in-out">
                     <div class="overflow-hidden flex flex-col">
                         <div class="h-px bg-zinc-100 mx-5"></div>
 
@@ -125,7 +129,7 @@
                             </div>
                         </div>
 
-                        <div id="repeat-setting-wrapper" class="grid grid-rows-[1fr] opacity-100 transition-all duration-300 ease-in-out">
+                        <div id="repeat-setting-wrapper" class="grid {{ $showRepeat }} transition-all duration-300 ease-in-out">
                             <div class="overflow-hidden flex flex-col">
                                 <div class="h-px bg-zinc-100 mx-5"></div>
 
@@ -239,8 +243,6 @@
             };
 
             if (notifyToggle && timeSelect && repeatSelect) {
-                updateVisibility();
-
                 notifyToggle.addEventListener('change', () => { updateVisibility(); saveSettings(); });
                 timeSelect.addEventListener('change', () => { updateVisibility(); saveSettings(); });
                 repeatSelect.addEventListener('change', saveSettings);

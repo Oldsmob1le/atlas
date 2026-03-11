@@ -68,7 +68,6 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        // Проверяем, что событие принадлежит текущему пользователю
         if ($event->user_id !== auth()->id()) {
             abort(403, 'У вас нет доступа к этому событию.');
         }
@@ -106,8 +105,6 @@ class EventController extends Controller
         }
 
         $event->delete();
-
-        // Возвращаемся на ту страницу, откуда пришли (дашборд или календарь)
         return back()->with('success', 'Событие удалено!');
     }
 

@@ -45,6 +45,11 @@
                     <input type="password" name="password" required 
                            class="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-white focus:outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-400 transition-all">
                 </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm font-medium text-zinc-700">Повторите пароль</label>
+                    <input type="password" name="password" required 
+                           class="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-white focus:outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-400 transition-all">
+                </div>
                 
                 <button type="submit" 
                         class="mt-2 w-full py-3 px-4 bg-zinc-900 text-white rounded-xl font-medium hover:bg-zinc-800 active:-translate-y-[1px] active:scale-[0.98] transition-all duration-200 shadow-sm">
@@ -66,7 +71,7 @@
         <div class="absolute inset-8 rounded-[2.5rem] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] bg-white/5 backdrop-blur-md pointer-events-none"></div>
         
         <div class="relative z-10 pt-8 pl-8 text-white/40 font-mono text-sm">
-            SYS.ATLAS // v1.0.3-beta
+            SYS.ATLAS // v1.0.4-beta
         </div>
         
         <div class="relative z-10 pb-12 pl-8 pr-12 max-w-lg">
