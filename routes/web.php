@@ -28,3 +28,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/telegram/webhook', [TelegramController::class, 'webhook'])->name('telegram.webhook');
+
+Route::get('/app', function () {
+    return view('install');
+})->name('app.install');

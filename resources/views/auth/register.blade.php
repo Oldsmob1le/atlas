@@ -79,7 +79,7 @@
         </div>
 
         <div class="relative z-10 pt-8 pl-8 text-white/40 font-mono text-sm">
-            SYS.ATLAS // v1.0.8beta
+            SYS.ATLAS // v1.0.9-beta
         </div>
 
         <div class="relative z-10 pb-12 pl-8 pr-12 max-w-lg">
