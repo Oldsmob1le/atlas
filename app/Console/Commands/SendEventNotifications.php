@@ -14,12 +14,29 @@ class SendEventNotifications extends Command
 
     public function handle()
     {
+        $now = Carbon::now();
+
+        $pastHolidays = Event::where('category', 'birthday')
+            ->where('starts_at', '<', $now)
+            ->get();
+
+        foreach ($pastHolidays as $holiday) {
+            $newDate = Carbon::parse($holiday->starts_at);
+            
+            while ($newDate->lte($now)) {
+                $newDate->addYear();
+            }
+
+            $holiday->starts_at = $newDate;
+            $holiday->is_notified = false;
+            $holiday->is_repeat_notified = false;
+            $holiday->save();
+        }
+
         $events = Event::with('user')
             ->where('is_notified', false)
             ->orWhere('is_repeat_notified', false)
             ->get();
-
-        $now = Carbon::now();
 
         foreach ($events as $event) {
             $user = $event->user;
